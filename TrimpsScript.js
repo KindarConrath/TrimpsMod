@@ -23,7 +23,7 @@ ShowTooltips=true;
 
 document.getElementById("resourceColumn").innerHTML += ' <input id="chkBuyStorage" ' + abStorage + ' style="left: 50%; top: 50%; position: absolute;" type="checkbox">';
 document.getElementById("buildingsTitleSpan").outerHTML += ' <input id="chkBuyBuilding" ' + abBuildings + ' type="checkbox">';
-document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
+document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"> <input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 document.getElementById("equipmentTitleSpan").innerHTML += ' <input id="chkBuyEquipH" ' + abArmor + ' type="checkbox"><input id="chkBuyEquipA" ' + abWeapons + ' type="checkbox">';
 document.getElementById("jobsTitleSpan").innerHTML += ' <input id="chkBuyJobs" ' + abJobs + ' type="checkbox"><input id="txtGeneticistTimeLimit" ' + balGen + ' style="width: 40px; height: 30px; color: black;" type="text" value="30"></input>';
 
@@ -49,7 +49,7 @@ AutoBuyUpgrades=function ()
 {
 	if (!document.getElementById("chkBuyUpgrades"))
 	{
-		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
+		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"> <input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyUpgrades").checked;
 }
@@ -66,7 +66,7 @@ AutoBuyPrestigeH=function ()
 {
 	if (!document.getElementById("chkBuyPrestigeH"))
 	{
-		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
+		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"> <input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyPrestigeH").checked;
 }
@@ -406,7 +406,7 @@ function EvalAll()
 			)
 			{
 				var upgrade = TheThings[what].Upgrade;
-				console.log('Wanna do upgrade '+upgrade);
+				//console.log('Wanna do upgrade '+upgrade);
 				BuyDaUpgrade(upgrade);
 			}
 		}
@@ -438,7 +438,7 @@ function EvalAll()
 			{
 				if (DaThing.Equip && !Best[stat].Wall && canAffordBuilding(Best[stat].Name, null, null, true))
 				{
-					console.log('Wanna level equip '+Best[stat].Name);
+					//console.log('Wanna level equip '+Best[stat].Name);
 					BuyDaEquip(Best[stat].Name);
 				}
 			}
@@ -458,7 +458,7 @@ Builder={
 			{
 				if (AutoBuyBuilding() && !game.buildings[what].locked && canAffordBuilding(what))
 				{
-					console.log('Wanna buy '+what);
+					//console.log('Wanna buy '+what);
 					BuyDaBuilding(what);
 				}
 				else if (
@@ -476,7 +476,7 @@ Builder={
 					if (canAffordTwoLevel(game.upgrades.Gigastation))
 					{
 						var upgrade = 'Gigastation';
-						console.log('Wanna do upgrade '+upgrade);
+						//console.log('Wanna do upgrade '+upgrade);
 						BuyDaUpgrade(upgrade);
 					}						
 				}
@@ -499,7 +499,7 @@ Builder={
 						}
 						if (Warp.locked || CollEffect>WarpEffect || game.resources.gems.owned>CollGemCost+WarpGemCost)
 						{
-							console.log('Wanna buy '+what);
+							//console.log('Wanna buy '+what);
 							BuyDaBuilding(what);
 						}
 					}
@@ -516,13 +516,13 @@ Builder={
 						}
 						if (Wanna)
 						{
-							console.log('Wanna buy '+what);
+							//console.log('Wanna buy '+what);
 							BuyDaBuilding(what);
 						}
 					}
 					else 
 					{
-						console.log('Wanna buy '+what);
+						//console.log('Wanna buy '+what);
 						BuyDaBuilding(what);
 					}
 				}
@@ -546,10 +546,10 @@ setInterval(function(){
 	{
 		if (game.resources[Bs[B]].owned>game.resources[Bs[B]].max*packMod*abStoragePercentage)
 		{
-			console.log(B+': '+Bs[B]+' - '+game.resources[Bs[B]].owned+'/'+(game.resources[Bs[B]].max*packMod*0.99));
+			//console.log(B+': '+Bs[B]+' - '+game.resources[Bs[B]].owned+'/'+(game.resources[Bs[B]].max*packMod*0.99));
 			if (AutoBuyStorage() && canAffordBuilding(B))
 			{
-				console.log('Wanna buy '+B);
+				//console.log('Wanna buy '+B);
 				BuyDaBuilding(B);
 			}
 		}
@@ -601,7 +601,7 @@ setInterval(function(){
 			{
 				if ((game.jobs.Geneticist.locked && GetBreedTime()>GeneticistTimeLimit()+1) || !game.jobs.Geneticist.locked)
 				{
-					console.log('Wanna read '+name);
+					//console.log('Wanna read '+name);
 					BuyDaUpgrade(name);
 				}
 			}
@@ -609,7 +609,7 @@ setInterval(function(){
 			{
 				if (name!='Coordination')
 				{
-					console.log('Wanna read '+name);
+					//console.log('Wanna read '+name);
 				}
 				BuyDaUpgrade(name);
 			}
@@ -800,23 +800,39 @@ function JobsTime()
 setInterval('JobsTime()',250);
 
 var ManualGather='metal';
+var auto=false;
+var autoGather='';
 function ManualLabor()
 {
-	if (game.global.playerGathering!='buildings' && game.global.playerGathering!='science')
+	//console.log(game.global.buildingsQueue);
+	//console.log(game.global.playerModifier);
+	if (game.global.playerGathering!='buildings' || game.global.playerGathering!='science')
 	{
 		ManualGather=game.global.playerGathering;
 	}
-	if ((game.global.buildingsQueue.length > 2)||(game.global.buildingsQueue.length > 0 && game.global.playerModifier>1000)&& game.global.playerGathering!='buildings') 
+	if (game.global.buildingsQueue.length > 0 && game.global.buildingsQueue[0].substr(0, game.global.buildingsQueue[0].indexOf('.')) != 'Trap') 
 	{
-        setGather('buildings');
+		auto=true;
+		autoGather='buildings';
     } 
-	else if (game.global.playerModifier*60>game.resources.science.owned)
+	else if (game.global.playerModifier*60>game.resources.science.owned && autoGather!='buildings')
 	{
-		setGather('science');
+		auto=true;
+		autoGather='science';
+	}
+	else
+	{
+		auto=false;
+		autoGather='';
+	}
+	
+	if(auto)
+	{
+		setGather(autoGather);
 	}
 	else 
 	{ 
-		setGather(ManualGather);          
+		setGather(ManualGather);          			
 	}
 }
 
