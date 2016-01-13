@@ -1,41 +1,64 @@
+//CSS
+//document.body.checkbox.style
+
+
+//End CSS
+
+
+//ToolTips
+var abStorage = "onmouseover=\"tooltip(\'Auto-Buy Storage\', \'customText\', event, \'Purchase storage upgrades when a resource is over 90% full.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abBuildings = "onmouseover=\"tooltip(\'Auto-Buy Buildings\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abJobs = "onmouseover=\"tooltip(\'Auto-Buy Jobs\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abNEUpgrades = "onmouseover=\"tooltip(\'Auto-Buy Upgrades\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abArmor = "onmouseover=\"tooltip(\'Auto-Buy Armor\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abWeapons = "onmouseover=\"tooltip(\'Auto-Buy Weapons\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abArmorUpgrades = "onmouseover=\"tooltip(\'Auto-Buy Armor Upgrades\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var abWeaponUpgrades = "onmouseover=\"tooltip(\'Auto-Buy Weapon Upgrades\', \'customText\', event, \'Details to come later.\');\" onmouseout=\"tooltip(\'hide\')\""
+var balGen = "onmouseover=\"tooltip(\'Balance Geneticists\', \'customText\', event, \'Balance Geneticists for this breeding time.\');\" onmouseout=\"tooltip(\'hide\')\""
+//End ToolTips
+
+var abStoragePercentage = 0.9;
+
 ShowTooltips=true;
 
-document.getElementById("resourceColumn").innerHTML += '<input id="chkBuyStorage" title="autobuy Storage" style="left: 50%; top: 50%; position: absolute;" type="checkbox">';
+document.getElementById("resourceColumn").innerHTML += ' <input id="chkBuyStorage" ' + abStorage + ' style="left: 50%; top: 50%; position: absolute;" type="checkbox">';
+document.getElementById("buildingsTitleSpan").outerHTML += ' <input id="chkBuyBuilding" ' + abBuildings + ' type="checkbox">';
+document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
+document.getElementById("equipmentTitleSpan").innerHTML += ' <input id="chkBuyEquipH" ' + abArmor + ' type="checkbox"><input id="chkBuyEquipA" ' + abWeapons + ' type="checkbox">';
+document.getElementById("jobsTitleSpan").innerHTML += ' <input id="chkBuyJobs" ' + abJobs + ' type="checkbox"><input id="txtGeneticistTimeLimit" ' + balGen + ' style="width: 40px; height: 30px; color: black;" type="text" value="30"></input>';
+
 AutoBuyStorage=function ()
 {
 	if (!document.getElementById("chkBuyStorage"))
 	{
-		document.getElementById("resourceColumn").innerHTML += '<input id="chkBuyStorage" title="autobuy Storage" style="left: 50%; top: 50%; position: absolute;" type="checkbox">';
+		document.getElementById("resourceColumn").innerHTML += ' <input id="chkBuyStorage" ' + abStorage + ' style="left: 50%; top: 50%; position: absolute;" type="checkbox">';
 	}
 	return document.getElementById("chkBuyStorage").checked;
 }
 
-document.getElementById("buildingsTitleSpan").outerHTML += '<input id="chkBuyBuilding" title="autobuy Buildings" type="checkbox">';
 AutoBuyBuilding=function ()
 {
 	if (!document.getElementById("chkBuyBuilding"))
 	{
-		document.getElementById("buildingsTitleSpan").outerHTML += '<input id="chkBuyBuilding" title="autobuy Storage" type="checkbox">';
+		document.getElementById("buildingsTitleSpan").outerHTML += ' <input id="chkBuyBuilding" ' + abStorage + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyBuilding").checked;
 }
 
-document.getElementById("upgradesTitleSpan").outerHTML += '<input id="chkBuyUpgrades" title="autobuy non eqipment Upgrades" type="checkbox">';
 AutoBuyUpgrades=function ()
 {
 	if (!document.getElementById("chkBuyUpgrades"))
 	{
-		document.getElementById("upgradesTitleSpan").outerHTML += '<input id="chkBuyUpgrades" title="autobuy non eqipment Upgrades" type="checkbox">';
+		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyUpgrades").checked;
 }
 
-document.getElementById("equipmentTitleSpan").innerHTML += '<table><tr><td><input id="chkBuyEquipH" title="autobuy Armor" type="checkbox"><input id="chkBuyEquipA" title="autobuy Weapons" type="checkbox"></td></tr><tr><td><input id="chkBuyPrestigeH" title="autobuy Armor Upgrades" type="checkbox"><input id="chkBuyPrestigeA" title="autobuy Weapon Upgrades" type="checkbox"></td></tr></table>';
 AutoBuyEquipH=function ()
 {
 	if (!document.getElementById("chkBuyEquipH"))
 	{
-		document.getElementById("equipmentTitleSpan").innerHTML += '<table><tr><td><input id="chkBuyEquipH" title="autobuy Armor" type="checkbox"><input id="chkBuyEquipA" title="autobuy Weapons" type="checkbox"></td></tr><tr><td><input id="chkBuyPrestigeH" title="autobuy Armor Upgrades" type="checkbox"><input id="chkBuyPrestigeA" title="autobuy Weapon Upgrades" type="checkbox"></td></tr></table>';
+		document.getElementById("equipmentTitleSpan").innerHTML += ' <input id="chkBuyEquipH" ' + abArmor + ' type="checkbox"><input id="chkBuyEquipA" ' + abWeapons + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyEquipH").checked;
 }
@@ -43,25 +66,47 @@ AutoBuyPrestigeH=function ()
 {
 	if (!document.getElementById("chkBuyPrestigeH"))
 	{
-		document.getElementById("equipmentTitleSpan").innerHTML += '<table><tr><td><input id="chkBuyEquipH" title="autobuy Armor" type="checkbox"><input id="chkBuyEquipA" title="autobuy Weapons" type="checkbox"></td></tr><tr><td><input id="chkBuyPrestigeH" title="autobuy Armor Upgrades" type="checkbox"><input id="chkBuyPrestigeA" title="autobuy Weapon Upgrades" type="checkbox"></td></tr></table>';
+		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyPrestigeH").checked;
 }
+
 AutoBuyEquipA=function ()
 {
 	if (!document.getElementById("chkBuyEquipA"))
 	{
-		document.getElementById("equipmentTitleSpan").innerHTML += '<table><tr><td><input id="chkBuyEquipH" title="autobuy Armor" type="checkbox"><input id="chkBuyEquipA" title="autobuy Weapons" type="checkbox"></td></tr><tr><td><input id="chkBuyPrestigeH" title="autobuy Armor Upgrades" type="checkbox"><input id="chkBuyPrestigeA" title="autobuy Weapon Upgrades" type="checkbox"></td></tr></table>';
+		document.getElementById("equipmentTitleSpan").innerHTML += ' <input id="chkBuyEquipH" ' + abArmor + ' type="checkbox"><input id="chkBuyEquipA" ' + abWeapons + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyEquipA").checked;
 }
+
 AutoBuyPrestigeA=function ()
 {
 	if (!document.getElementById("chkBuyPrestigeA"))
 	{
-		document.getElementById("equipmentTitleSpan").innerHTML += '<table><tr><td><input id="chkBuyEquipH" title="autobuy Armor" type="checkbox"><input id="chkBuyEquipA" title="autobuy Weapons" type="checkbox"></td></tr><tr><td><input id="chkBuyPrestigeH" title="autobuy Armor Upgrades" type="checkbox"><input id="chkBuyPrestigeA" title="autobuy Weapon Upgrades" type="checkbox"></td></tr></table>';
+		document.getElementById("upgradesTitleSpan").outerHTML += ' <input id="chkBuyUpgrades" ' + abNEUpgrades + ' type="checkbox"><input id="chkBuyPrestigeH" ' + abArmorUpgrades + ' type="checkbox"><input id="chkBuyPrestigeA" ' + abWeaponUpgrades + ' type="checkbox">';
 	}
 	return document.getElementById("chkBuyPrestigeA").checked;
+}
+
+AutoBuyJobs=function ()
+{
+	if (!document.getElementById("chkBuyJobs"))
+	{
+		document.getElementById("jobsTitleSpan").innerHTML += ' <input id="chkBuyJobs" ' + abJobs + ' type="checkbox"><input id="txtGeneticistTimeLimit" ' + balGen + ' style="width: 40px; height: 30px; color: black;" type="text" value="30"></input>';
+	}
+	return document.getElementById("chkBuyJobs").checked;
+}
+
+GeneticistTimeLimit=function ()
+{
+	if (!document.getElementById("txtGeneticistTimeLimit"))
+	{
+				document.getElementById("jobsTitleSpan").innerHTML += ' <input id="chkBuyJobs" ' + abJobs + ' type="checkbox"><input id="txtGeneticistTimeLimit" ' + balGen + ' style="width: 40px; height: 30px; color: black;" type="text" value="30"></input>';
+	}
+	var BT=parseInt(document.getElementById("txtGeneticistTimeLimit").value) || 3;
+	BT=(BT>3 && game.global.challengeActive=="Electricity")?3:BT;
+	return BT;
 }
 
 OldTooltip=tooltip;
@@ -499,7 +544,7 @@ setInterval(function(){
 	var Bs={'Barn':'food','Shed':'wood','Forge':'metal'};
 	for (var B in Bs)
 	{
-		if (game.resources[Bs[B]].owned>game.resources[Bs[B]].max*packMod*0.9)
+		if (game.resources[Bs[B]].owned>game.resources[Bs[B]].max*packMod*abStoragePercentage)
 		{
 			console.log(B+': '+Bs[B]+' - '+game.resources[Bs[B]].owned+'/'+(game.resources[Bs[B]].max*packMod*0.99));
 			if (AutoBuyStorage() && canAffordBuilding(B))
@@ -581,31 +626,10 @@ Builder.Start('Hotel',75)
 Builder.Start('Resort',75)
 Builder.Start('Gateway',20)
 Builder.Start('Wormhole',10)
-Builder.Start('Collector', 250)
-Builder.Start('Warpstation',30)
+Builder.Start('Collector')
+Builder.Start('Warpstation',27)
 Builder.Start('Tribute')
 Builder.Start('Nursery')
-
-document.getElementById("jobsTitleSpan").innerHTML += '<input id="chkBuyJobs" title="autobuy Jobs" type="checkbox"><input id="txtGeneticistTimeLimit" title="balance Geneticists for this breeding time" style="width: 40px; height: 25px; color: black;" type="text" value="30"></input>';
-AutoBuyJobs=function ()
-{
-	if (!document.getElementById("chkBuyJobs"))
-	{
-		document.getElementById("jobsTitleSpan").innerHTML += '<input id="chkBuyJobs" title="autobuy Jobs" type="checkbox"><input id="txtGeneticistTimeLimit" title="balance Geneticists for this breeding time" style="width: 40px; height: 25px; color: black;" type="text" value="30"></input>';
-	}
-	return document.getElementById("chkBuyJobs").checked;
-}
-
-GeneticistTimeLimit=function ()
-{
-	if (!document.getElementById("txtGeneticistTimeLimit"))
-	{
-				document.getElementById("jobsTitleSpan").innerHTML += '<input id="chkBuyJobs" title="autobuy Jobs" type="checkbox"><input id="txtGeneticistTimeLimit" title="balance Geneticists for this breeding time" style="width: 40px; height: 25px; color: black;" type="text" value="30"></input>';
-	}
-	var BT=parseInt(document.getElementById("txtGeneticistTimeLimit").value) || 3;
-	BT=(BT>3 && game.global.challengeActive=="Electricity")?3:BT;
-	return BT;
-}
 
 function MaxWorkers()
 {
@@ -689,13 +713,13 @@ TheJobs=[
 		Name:'Explorer',
 		Want:1,
 		Buffer:0,
-		Increase:function(want){return game.jobs.Explorer.owned<100?10:0;}
+		Increase:function(want){return 10;}
 	},
 	{
 		Name:'Trainer',
 		Want:1,
 		Buffer:0,
-		Increase:function(want){return Math.ceil((game.jobs.Trainer.owned+1)/100);}
+		Increase:function(want){return 10;}
 	},
 	{
 		Name:'Geneticist',
@@ -774,26 +798,3 @@ function JobsTime()
 }
 
 setInterval('JobsTime()',250);
-
-var ManualGather='metal';
-function ManualLabor()
-{
-	if (game.global.playerGathering!='buildings' && game.global.playerGathering!='science')
-	{
-		ManualGather=game.global.playerGathering;
-	}
-	if ((game.global.buildingsQueue.length > 2)||(game.global.buildingsQueue.length > 0 && game.global.playerModifier>1000)&& game.global.playerGathering!='buildings') 
-	{
-        setGather('buildings');
-    } 
-	else if (game.global.playerModifier*60>game.resources.science.owned)
-	{
-		setGather('science');
-	}
-	else 
-	{ 
-		setGather(ManualGather);          
-	}
-}
-
-setInterval('ManualLabor()',250);
