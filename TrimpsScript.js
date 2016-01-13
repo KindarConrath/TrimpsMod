@@ -626,8 +626,8 @@ Builder.Start('Hotel',75)
 Builder.Start('Resort',75)
 Builder.Start('Gateway',20)
 Builder.Start('Wormhole',10)
-Builder.Start('Collector')
-Builder.Start('Warpstation',27)
+Builder.Start('Collector', 250)
+Builder.Start('Warpstation',30)
 Builder.Start('Tribute')
 Builder.Start('Nursery')
 
@@ -713,13 +713,13 @@ TheJobs=[
 		Name:'Explorer',
 		Want:1,
 		Buffer:0,
-		Increase:function(want){return 10;}
+		Increase:function(want){return game.jobs.Explorer.owned<100?10:0;}
 	},
 	{
 		Name:'Trainer',
 		Want:1,
 		Buffer:0,
-		Increase:function(want){return 10;}
+		Increase:function(want){return Math.ceil((game.jobs.Trainer.owned+1)/100);}
 	},
 	{
 		Name:'Geneticist',
@@ -798,3 +798,26 @@ function JobsTime()
 }
 
 setInterval('JobsTime()',250);
+
+var ManualGather='metal';
+function ManualLabor()
+{
+	if (game.global.playerGathering!='buildings' && game.global.playerGathering!='science')
+	{
+		ManualGather=game.global.playerGathering;
+	}
+	if ((game.global.buildingsQueue.length > 2)||(game.global.buildingsQueue.length > 0 && game.global.playerModifier>1000)&& game.global.playerGathering!='buildings') 
+	{
+        setGather('buildings');
+    } 
+	else if (game.global.playerModifier*60>game.resources.science.owned)
+	{
+		setGather('science');
+	}
+	else 
+	{ 
+		setGather(ManualGather);          
+	}
+}
+
+setInterval('ManualLabor()',250);
