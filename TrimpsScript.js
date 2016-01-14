@@ -804,35 +804,31 @@ var auto=false;
 var autoGather='';
 function ManualLabor()
 {
-	//console.log(game.global.buildingsQueue);
-	//console.log(game.global.playerModifier);
-	if (game.global.playerGathering!='buildings' || game.global.playerGathering!='science')
+	if (!auto && game.global.playerGathering!='buildings' && game.global.playerGathering!='science')
 	{
 		ManualGather=game.global.playerGathering;
 	}
+	
 	if (game.global.buildingsQueue.length > 0 && game.global.buildingsQueue[0].substr(0, game.global.buildingsQueue[0].indexOf('.')) != 'Trap') 
 	{
 		auto=true;
 		autoGather='buildings';
-    } 
-	else if (game.global.playerModifier*60>game.resources.science.owned && autoGather!='buildings')
+	} 
+	else if (game.global.playerModifier*60>game.resources.science.owned && game.resources.science.owned != 0)
 	{
 		auto=true;
 		autoGather='science';
 	}
-	else
+	else if (auto)
 	{
 		auto=false;
 		autoGather='';
+		setGather(ManualGather);          			
 	}
-	
+		
 	if(auto)
 	{
 		setGather(autoGather);
-	}
-	else 
-	{ 
-		setGather(ManualGather);          			
 	}
 }
 
